@@ -19,6 +19,8 @@ public class Game {
 
         board = new Board(size);
         players = new ArrayDeque<>();
+        winners = new ArrayDeque<>();
+        System.out.println("game constructor done");
     }
 
     public void addPlayer(Player player) {
@@ -27,6 +29,7 @@ public class Game {
 
     public void launch() {
         System.out.println("Let the game begin.");
+        board.printBoard();
         Scanner scanner = new Scanner(System.in);
         // we are playing till just 1 person remains
         while (players.size() > 1) {
@@ -48,6 +51,7 @@ public class Game {
                 players.offer(player);
             }
         }
+        scanner.close();
     }
 
     private boolean isWinner(Player player) {
