@@ -1,4 +1,5 @@
 import entities.Game;
+import entities.Player;
 
 public class Client {
     public static void main(String[] args) {
@@ -6,6 +7,5 @@ public class Client {
         g.addPlayer(new Player("A"));
         g.addPlayer(new Player("B"));
         g.launch();
-
     }
 }
