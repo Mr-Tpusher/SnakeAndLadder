@@ -34,17 +34,18 @@ public class Game {
         // we are playing till just 1 person remains
         while (players.size() > 1) {
             Player player = players.poll();
+            String namePosition = player.getName() + "[" + player.getPosition() + "]";
+
             int number;
-            //do {
-                System.out.println(player.getName() + "[" + player.getPosition() + "]"
-                        + " it's your turn, press any character:");
+            do {
+                System.out.println( namePosition + " it's your turn, press any character:");
                 scanner.nextLine();
                 number = Dice.roll(numberOfDice);
-                System.out.println(player.getName() + " you got : " + number);
-            //} while (number > size * size - player.getPosition());
-
+                System.out.println(namePosition + " got : " + number);
+            } while (number == numberOfDice * 6);
 
             makeMove(player, number);
+            System.out.println(namePosition + " moved to -> [" + player.getPosition() + "]");
 
             if (isWinner(player)) {
                 winners.offer(player);
@@ -72,6 +73,6 @@ public class Game {
         } else {
             player.setPosition(newPosition);
         }
-        System.out.println(player.getName() + " moved to [" + player.getPosition() + "]");
+        //System.out.println(player.getName() + " moved to [" + player.getPosition() + "]");
     }
 }
