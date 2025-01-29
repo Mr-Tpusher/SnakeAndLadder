@@ -1,7 +1,6 @@
 package entities;
 
 import lombok.Data;
-
 import java.util.*;
 
 @Data
@@ -20,11 +19,10 @@ public class Board {
 
     void printBoard() {
         // to-do:
-        System.out.println("Board printed.");
 
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                int cell = i * 10 + j;
+        for (int i = size - 1; i >= 0; i--) {
+            for (int j = size - 1; j >= 0; j--) {
+                int cell = (i * 10 + j) + 1;
                 System.out.print(cell);
                 if (obstacles.containsKey(cell)) {
                     System.out.print(obstacles.get(cell));
@@ -35,6 +33,7 @@ public class Board {
             }
             System.out.println();
         }
+        System.out.println();
     }
 
     void generateObstacle() {
@@ -43,10 +42,10 @@ public class Board {
         Random random = new Random();
         // generate ladders from 2 to 99
         while (obstacles.size() < size) {
-            int start = random.nextInt(100);
+            int start = random.nextInt(98) + 2;
             if (!occupied.contains(start)) {
                 occupied.add(start);
-                int end = random.nextInt(100);
+                int end = random.nextInt(98) + 2;
                 if (!occupied.contains(end) && end > start) {
                     occupied.add(end);
                     Obstacle ladder = new Ladder(start, end);
@@ -56,10 +55,10 @@ public class Board {
         }
         // generate snakes from 2 to 99
         while (obstacles.size() < 2 * size) {
-            int start = random.nextInt(100);
+            int start = random.nextInt(98) + 2;
             if (!occupied.contains(start)) {
                 occupied.add(start);
-                int end = random.nextInt(100);
+                int end = random.nextInt(98) + 2;
                 if (!occupied.contains(end) && end < start) {
                     occupied.add(end);
                     Obstacle snake = new Snake(start, end);
