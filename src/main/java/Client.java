@@ -1,5 +1,6 @@
 import entities.Game;
 import entities.Player;
+import util.Dice;
 
 public class Client {
     public static void main(String[] args) {

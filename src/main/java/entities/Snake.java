@@ -11,6 +11,6 @@ public class Snake extends Obstacle {
     }
     @Override
     public String toString() {
-        return " S[" + this.getEnd() + "]";
+        return " S[" + this.getStart() + "->" + this.getEnd() + "]";
     }
 }

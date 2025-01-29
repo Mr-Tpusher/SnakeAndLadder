@@ -17,9 +17,9 @@ public class Game {
         this.size = size;
         this.numberOfDice = numberOfDice;
 
-        board = new Board(size);
-        players = new ArrayDeque<>();
-        winners = new ArrayDeque<>();
+        this.board = new Board(size);
+        this.players = new ArrayDeque<>();
+        this.winners = new ArrayDeque<>();
         System.out.println("game constructor done");
     }
 
@@ -35,12 +35,14 @@ public class Game {
         while (players.size() > 1) {
             Player player = players.poll();
             int number;
-            do {
-                System.out.println(player.getName() + " it's your turn, press any character:");
+            //do {
+                System.out.println(player.getName() + "[" + player.getPosition() + "]"
+                        + " it's your turn, press any character:");
                 scanner.nextLine();
                 number = Dice.roll(numberOfDice);
                 System.out.println(player.getName() + " you got : " + number);
-            } while (number > size * size - player.getPosition());
+            //} while (number > size * size - player.getPosition());
+
 
             makeMove(player, number);
 
@@ -60,11 +62,16 @@ public class Game {
 
 
     void makeMove(Player player, int number) {
-        if (board.isObstacleEncountered(number)) {
-            player.setPosition(board.getObstacles().get(number).getEnd());
+        int newPosition = player.getPosition() + number;
+        if (newPosition > board.getTotalCells()) {
+            System.out.println("Can't move to " + newPosition);
+        } else if (board.isObstacleEncountered(newPosition)) {
+            Obstacle obstacle = board.getObstacles().get(newPosition);
+            obstacle.encounterMessage();
+            player.setPosition(obstacle.getEnd());
         } else {
-            player.setPosition(player.getPosition() + number);
+            player.setPosition(newPosition);
         }
-        System.out.println(player.getName() + " moved to " + player.getPosition());
+        System.out.println(player.getName() + " moved to [" + player.getPosition() + "]");
     }
 }

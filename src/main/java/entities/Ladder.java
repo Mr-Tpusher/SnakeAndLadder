@@ -12,6 +12,6 @@ public class Ladder extends Obstacle {
 
     @Override
     public String toString() {
-        return " L[" + this.getEnd() + "]";
+        return " L[" + this.getStart() + "->" + this.getEnd() + "]";
     }
 }
