@@ -1,13 +1,18 @@
 package entities;
 
+import lombok.Data;
+
+import java.util.HashMap;
 import java.util.Map;
 
+@Data
 public class Board {
-    int size;
-    Map<Integer, Obstacle> obstacles;
+    private int size;
+    private Map<Integer, Obstacle> obstacles;
 
     Board(int size) {
         // to-do: generate obstacles
+        obstacles = new HashMap<>();
         generateObstacle();
     }
 
@@ -19,5 +24,9 @@ public class Board {
     void generateObstacle() {
         // to-do: generate n obstacles
         System.out.println(this.size + "obstacles generated.");
+    }
+
+    public boolean isObstacleEncountered(int number) {
+        return obstacles.containsKey(number);
     }
 }
