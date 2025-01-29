@@ -79,7 +79,7 @@ public class Board {
 
     }
 
-    public boolean isObstacleEncountered(int number) {
-        return obstacles.containsKey(number);
+    public boolean isObstacleEncountered(int position) {
+        return obstacles.containsKey(position);
     }
 }
